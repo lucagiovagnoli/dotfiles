@@ -216,3 +216,18 @@ function my_srm {
 # where:
 #  -i itemize (gives complete info of the differences via flags)
 # --delete (for symmetrical comparisons, shows what items will be deleted in DEST)
+
+## CRYTPSETUP (Encrypt OS partition)
+#
+# 1. You can restore the /boot partition using boot-repair
+# 2. To restore (or setup) cryptsetup on boot, follow:
+# https://help.ubuntu.com/community/Full_Disk_Encryption_Howto_2019
+#
+# vim /etc/fstab  (for mounting partitions)
+# vim /etc/crypttab  (for decrypting partitions)
+# mount /dev/mapper/abcdef1234567 /target
+# for n in proc sys dev etc/resolv.conf; do mount --rbind /$n /target/$n; done
+# chroot /target
+# mount -a
+# apt install -y cryptsetup-initramfs
+# update-initramfs -u -k all
